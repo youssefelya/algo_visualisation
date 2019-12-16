@@ -2,7 +2,7 @@
   "name": "sorting-visualizer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/youssefelya/algo_visualisation",
+  "homepage": "https://youssefelya.github.io/algo_visualisation/",
   "dependencies": {
     "gh-pages": "^2.1.1",
     "react": "^16.10.2",
