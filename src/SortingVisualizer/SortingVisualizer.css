@@ -1,12 +1,18 @@
 .array-container {
   position: absolute;
-  left: 100px;
-  /* top: 100px; */
+  left: 400px;
+  top: 90px;
 }
 
 .array-bar {
-  width: 2px;
+  width: 20px;
   background-color: blue;
-  display: inline-block;
-  margin: 0 1px;
+  display: inline-flex;
+  margin: 0 4px;
+}
+
+.buttons button {
+  width: 150px;
+  height: 75px;
+  top: 10px;
 }
