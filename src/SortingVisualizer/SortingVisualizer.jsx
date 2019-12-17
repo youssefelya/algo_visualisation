@@ -2,12 +2,13 @@ import React from 'react';
 import {getMergeSortAnimations} from '../sortingAlgorithms/sortingAlgorithms.js';
 import {heapSort} from '../sortingAlgorithms/heapSort.js';
 import './SortingVisualizer.css';
+import {selectSort} from '../sortingAlgorithms/algorithm/selectSort';
 
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 300;
 
 // Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 20;
+const NUMBER_OF_ARRAY_BARS = 10;
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = 'blue';
@@ -65,27 +66,7 @@ export default class SortingVisualizer extends React.Component {
   }
 
   heapSort() {
-    const animations = heapSort(this.state.array, [], ANIMATION_SPEED_MS);
-    for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName('array-bar');
-      const isColorChange = i % 3 !== 2;
-      if (isColorChange) {
-        const [barOneIdx, barTwoIdx] = animations[i];
-        const barOneStyle = arrayBars[barOneIdx].style;
-        const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
-        setTimeout(() => {
-          barOneStyle.backgroundColor = color;
-          barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
-      } else {
-        setTimeout(() => {
-          const [barOneIdx, newHeight] = animations[i];
-          const barOneStyle = arrayBars[barOneIdx].style;
-          barOneStyle.height = `${newHeight}px`;
-        }, i * ANIMATION_SPEED_MS);
-      }
-    }
+    let arraySorted = this.state.array.slice().sort((a, b) => a - b);
   }
 
   bubbleSort() {
@@ -104,7 +85,7 @@ export default class SortingVisualizer extends React.Component {
       }
       const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
       const mergeSortedArray = getMergeSortAnimations(array.slice());
-      console.log(arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
+      //   console.log(arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
     }
   }
 
