@@ -1,18 +1,20 @@
 .array-container {
-  position: absolute;
   left: 400px;
+  border: 6px solid #F4F700;
   top: 90px;
+  height: 500px;
+  display: inline-flex;
 }
 
 .array-bar {
   width: 20px;
   background-color: blue;
-  display: inline-flex;
   margin: 0 4px;
 }
 
 .buttons button {
   width: 150px;
   height: 75px;
+  border: 2px solid #FFFFF0;
   top: 10px;
 }

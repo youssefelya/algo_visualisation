@@ -3,6 +3,8 @@ import {getMergeSortAnimations} from '../sortingAlgorithms/sortingAlgorithms.js'
 import {heapSort} from '../sortingAlgorithms/heapSort.js';
 import './SortingVisualizer.css';
 import {selectSort} from '../sortingAlgorithms/algorithm/selectSort';
+import {quickSort} from '../sortingAlgorithms/algorithm/quickSort';
+import {radixSort} from '../sortingAlgorithms/algorithm/radixSort';
 
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 300;
@@ -11,7 +13,7 @@ const ANIMATION_SPEED_MS = 300;
 const NUMBER_OF_ARRAY_BARS = 10;
 
 // This is the main color of the array bars.
-const PRIMARY_COLOR = 'blue';
+const PRIMARY_COLOR = 'gray';
 
 // This is the color of array bars that are being compared throughout the animations.
 const SECONDARY_COLOR = 'red';
@@ -32,13 +34,12 @@ export default class SortingVisualizer extends React.Component {
   resetArray() {
     const array = [];
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
-      array.push(randomIntFromInterval(5, 500));
+      array.push(randomIntFromInterval(3, 87));
     }
     this.setState({array});
   }
 
-  mergeSort() {
-    const animations = getMergeSortAnimations(this.state.array);
+  animationFunction(animations) {
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName('array-bar');
       const isColorChange = i % 3 !== 2;
@@ -55,14 +56,26 @@ export default class SortingVisualizer extends React.Component {
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
-          barOneStyle.height = `${newHeight}px`;
+          // @ts-ignore
+          arrayBars[barOneIdx].innerText = newHeight;
+          barOneStyle.height = `${newHeight * 4}px`;
         }, i * ANIMATION_SPEED_MS);
       }
     }
   }
 
+  mergeSort() {
+    const animations = getMergeSortAnimations(this.state.array);
+    this.animationFunction(animations);
+  }
+  selectSort() {
+    const animations = selectSort(this.state.array);
+    this.animationFunction(animations);
+  }
   quickSort() {
-    // We leave it as an exercise to the viewer of this code to implement this method.
+    console.log('array --> ', this.state.array);
+    const animation = quickSort(this.state.array, 0, this.state.array.length);
+    console.log(animation);
   }
 
   heapSort() {
@@ -71,6 +84,10 @@ export default class SortingVisualizer extends React.Component {
 
   bubbleSort() {
     // We leave it as an exercise to the viewer of this code to implement this method.
+  }
+  radixSort() {
+    const animations = radixSort(this.state.array);
+    console.log(animations);
   }
 
   // NOTE: This method will only work if your sorting algorithms actually return
@@ -91,7 +108,6 @@ export default class SortingVisualizer extends React.Component {
 
   render() {
     const {array} = this.state;
-
     return (
       <div>
         <div className="array-container">
@@ -101,8 +117,10 @@ export default class SortingVisualizer extends React.Component {
               key={idx}
               style={{
                 backgroundColor: PRIMARY_COLOR,
-                height: `${value}px`,
-              }}></div>
+                height: `${value * 4}px`,
+              }}>
+              {value}
+            </div>
           ))}
         </div>
         <div className="buttons">
@@ -110,10 +128,12 @@ export default class SortingVisualizer extends React.Component {
           <button onClick={() => this.mergeSort()}>Merge Sort</button>
           <button onClick={() => this.quickSort()}>Quick Sort</button>
           <button onClick={() => this.heapSort()}>Heap Sort</button>
+          <button onClick={() => this.radixSort()}>Radix Sort</button>
+          <button onClick={() => this.selectSort()}>selection Sort</button>
           <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-          <button onClick={() => this.testSortingAlgorithms()}>
+          {/* <button onClick={() => this.testSortingAlgorithms()}>
             Test Sorting Algorithms (BROKEN)
-          </button>
+          </button> */}
         </div>
       </div>
     );
