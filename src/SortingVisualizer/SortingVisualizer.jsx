@@ -1,6 +1,5 @@
 import React from 'react';
 import {getMergeSortAnimations} from '../sortingAlgorithms/sortingAlgorithms.js';
-import {heapSort} from '../sortingAlgorithms/heapSort.js';
 import './SortingVisualizer.css';
 import {selectSort} from '../sortingAlgorithms/algorithm/selectSort';
 import {quickSort} from '../sortingAlgorithms/algorithm/quickSort';
@@ -79,7 +78,7 @@ export default class SortingVisualizer extends React.Component {
   }
 
   heapSort() {
-    let arraySorted = this.state.array.slice().sort((a, b) => a - b);
+   
   }
 
   bubbleSort() {
@@ -100,9 +99,8 @@ export default class SortingVisualizer extends React.Component {
       for (let i = 0; i < length; i++) {
         array.push(randomIntFromInterval(-1000, 1000));
       }
-      const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
-      const mergeSortedArray = getMergeSortAnimations(array.slice());
-      //   console.log(arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
+    
+      
     }
   }
 
@@ -131,9 +129,7 @@ export default class SortingVisualizer extends React.Component {
           <button onClick={() => this.radixSort()}>Radix Sort</button>
           <button onClick={() => this.selectSort()}>selection Sort</button>
           <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-          {/* <button onClick={() => this.testSortingAlgorithms()}>
-            Test Sorting Algorithms (BROKEN)
-          </button> */}
+      
         </div>
       </div>
     );

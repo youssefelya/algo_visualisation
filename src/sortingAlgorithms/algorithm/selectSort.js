@@ -9,7 +9,7 @@ export function selectSort(array) {
         minIndex = j;
       }
     }
-    if (i != minIndex) {
+    if (i !== minIndex) {
       let temp = array[i];
       array[i] = array[minIndex];
       array[minIndex] = temp;
